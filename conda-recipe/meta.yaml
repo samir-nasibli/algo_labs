@@ -1,0 +1,42 @@
+{% set version = "1.0.0" %}
+{% set buildnumber = 0 %}
+
+package:
+    name: algorithms
+    version: {{ version }}
+
+source:
+    path: ..
+
+build:
+    number: {{ buildnumber }}
+
+requirements:
+    #build:
+    #  - clangdev
+    #  - gxx_linux-64
+    host:
+      - cython
+      - numpy >=1.15
+      - python
+      - setuptools
+    run:
+      - numpy >=1.15
+      - python
+
+test:
+    requires:
+      - numpy
+      - pytest
+      - setuptools
+    imports:
+      - algorithms
+    commands:
+      - python -c "import algorithms"
+      - pytest -vv
+    source_files:
+      - tests/
+      
+extra:
+     recipe-maintainers:
+      - samir-nasibli
